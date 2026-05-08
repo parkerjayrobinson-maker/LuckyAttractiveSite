@@ -8,9 +8,9 @@
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{--ch-gap:18px;--ch-len:10px;--ch-thick:2px;--ch-color:rgba(255,255,255,0.9);}
 body{background:#0a0a0f;font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;color:#fff;}
- 
+
 #canvas-container{position:fixed;inset:0;}
- 
+
 /* ── Crosshair ── */
 #crosshair{
   position:fixed;top:50%;left:50%;
@@ -30,7 +30,7 @@ body{background:#0a0a0f;font-family:'Segoe UI',system-ui,sans-serif;overflow:hid
 .ch-dot   {width:3px;height:3px;border-radius:50%;background:var(--ch-color);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity .15s;}
 #crosshair.ads .ch-dot{opacity:1;}
 #crosshair.ads .ch-line{opacity:0;}
- 
+
 /* ── HUD ── */
 #hud{
   position:fixed;bottom:0;right:0;left:0;
@@ -55,7 +55,7 @@ body{background:#0a0a0f;font-family:'Segoe UI',system-ui,sans-serif;overflow:hid
 }
 #reload-bar-wrap.visible{opacity:1;}
 #reload-bar{height:100%;background:#fff;width:0%;transition:width .1s linear;}
- 
+
 /* ── Gun Selector ── */
 #gun-selector{
   position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
@@ -73,7 +73,7 @@ body{background:#0a0a0f;font-family:'Segoe UI',system-ui,sans-serif;overflow:hid
 .gun-slot .slot-key{font-size:9px;color:rgba(255,255,255,.3);font-family:monospace;}
 .gun-slot .slot-name{font-size:11px;font-weight:600;color:rgba(255,255,255,.6);}
 .gun-slot.active .slot-name{color:#aab4ff;}
- 
+
 /* ── Side Panel ── */
 #ui{
   position:fixed;top:0;left:0;width:200px;height:100vh;
@@ -86,7 +86,7 @@ body{background:#0a0a0f;font-family:'Segoe UI',system-ui,sans-serif;overflow:hid
 #ui-header{padding:16px 12px 10px;border-bottom:1px solid rgba(255,255,255,.07);}
 #ui-header h1{font-size:13px;font-weight:600;color:#e0e0ff;}
 #ui-header p{font-size:10px;color:rgba(255,255,255,.3);margin-top:2px;}
- 
+
 /* ── Guns Section ── */
 #guns-section{border-bottom:1px solid rgba(255,255,255,.07);padding:6px;}
 #guns-section-label{
@@ -130,7 +130,7 @@ body{background:#0a0a0f;font-family:'Segoe UI',system-ui,sans-serif;overflow:hid
   background:rgba(255,255,255,.15);flex-shrink:0;
 }
 .gun-var-btn.active::before{background:#aab4ff;}
- 
+
 /* ── Anims Section ── */
 #anims-section-label{
   font-size:9px;font-weight:700;letter-spacing:.12em;
@@ -158,7 +158,7 @@ body{background:#0a0a0f;font-family:'Segoe UI',system-ui,sans-serif;overflow:hid
 }
 #status-bar{padding:8px 12px;border-top:1px solid rgba(255,255,255,.07);font-size:10px;color:rgba(255,255,255,.25);}
 #status-bar span{color:rgba(255,255,255,.5);font-weight:500;}
- 
+
 /* ── Loading ── */
 #loading-overlay{
   position:fixed;inset:0;background:#0a0a0f;
@@ -170,7 +170,7 @@ body{background:#0a0a0f;font-family:'Segoe UI',system-ui,sans-serif;overflow:hid
 #loading-bar-wrap{width:200px;height:2px;background:rgba(255,255,255,.08);border-radius:1px;overflow:hidden;}
 #loading-bar{height:100%;background:linear-gradient(90deg,#6478ff,#a78bfa);width:0%;transition:width .3s;}
 #loading-msg{font-size:11px;color:rgba(255,255,255,.3);}
- 
+
 /* ── Click-to-enter hint ── */
 #enter-hint{
   position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
@@ -190,7 +190,7 @@ kbd{
 }
 #esc-hint{position:fixed;top:14px;right:14px;font-size:10px;color:rgba(255,255,255,.2);display:none;}
 #esc-hint.visible{display:block;}
- 
+
 /* ── Kill feed / damage number ── */
 #dmg-feed{position:fixed;top:80px;right:24px;display:flex;flex-direction:column;gap:4px;z-index:15;pointer-events:none;}
 .dmg-num{
@@ -205,15 +205,15 @@ kbd{
 </style>
 </head>
 <body>
- 
+
 <div id="loading-overlay">
   <h2>Loading X Bot Shooter</h2>
   <div id="loading-bar-wrap"><div id="loading-bar"></div></div>
   <div id="loading-msg">Initializing...</div>
 </div>
- 
+
 <div id="canvas-container"></div>
- 
+
 <!-- Crosshair -->
 <div id="crosshair">
   <div class="ch-line ch-top"></div>
@@ -222,7 +222,7 @@ kbd{
   <div class="ch-line ch-left"></div>
   <div class="ch-dot"></div>
 </div>
- 
+
 <!-- Enter hint -->
 <div id="enter-hint">
   <div id="enter-hint-box">
@@ -230,14 +230,14 @@ kbd{
     <p>
       <kbd>W/A/S/D</kbd> Move &nbsp; <kbd>⇧W/⇧S</kbd> Run<br>
       <kbd>Space</kbd> Jump &nbsp; <kbd>R</kbd> Reload &nbsp; <kbd>Q</kbd> Grenade<br>
-      <kbd>LMB</kbd> Shoot &nbsp; <kbd>RMB</kbd> Aim &nbsp; <kbd>1-4</kbd> Switch Gun<br>
+      <kbd>LMB</kbd> Shoot &nbsp; <kbd>RMB</kbd> Aim &nbsp; <kbd>1-5</kbd> Switch Gun<br>
       Mouse to look &nbsp; <kbd>Esc</kbd> to exit
     </p>
   </div>
 </div>
- 
+
 <div id="esc-hint">Press <b>Esc</b> to release mouse</div>
- 
+
 <!-- HUD -->
 <div id="hud">
   <div id="ammo-display">
@@ -247,7 +247,7 @@ kbd{
     <div id="reload-bar-wrap"><div id="reload-bar"></div></div>
   </div>
 </div>
- 
+
 <!-- Gun Selector -->
 <div id="gun-selector">
   <div class="gun-slot active" data-gun="rifle">
@@ -271,7 +271,7 @@ kbd{
     <span class="slot-name">Pistol</span>
   </div>
 </div>
- 
+
 <!-- Side Panel -->
 <div id="ui">
   <div id="ui-header">
@@ -286,9 +286,9 @@ kbd{
   <div id="anim-list"></div>
   <div id="status-bar">Playing: <span id="status-text">—</span></div>
 </div>
- 
+
 <div id="dmg-feed"></div>
- 
+
 <script>
   window.addEventListener('error', e => {
     document.getElementById('loading-msg').textContent = 'Error: ' + e.message;
@@ -296,7 +296,6 @@ kbd{
   window.addEventListener('unhandledrejection', e => {
     document.getElementById('loading-msg').textContent = 'Import failed: ' + (e.reason?.message || e.reason);
   });
-  // If still on "Initializing..." after 8s, CDN likely blocked
   setTimeout(() => {
     const msg = document.getElementById('loading-msg');
     if (msg && msg.textContent === 'Initializing...') {
@@ -312,15 +311,11 @@ kbd{
   }
 }
 </script>
-<script type="module" onerror="document.getElementById('loading-msg').textContent='JS Error: '+event.message">
+<script type="module">
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
- 
-// ════════════════════════════════════════════════════════════════
-//  CONSTANTS & DEFINITIONS
-// ════════════════════════════════════════════════════════════════
- 
+
 const ANIMATIONS = [
   { name:'walking',             file:'walking.fbx',                    icon:'🚶',key:'W',    loop:true },
   { name:'walking backwards',   file:'walking_backwards.fbx',          icon:'↩️',key:'S',    loop:true },
@@ -339,7 +334,7 @@ const ANIMATIONS = [
   { name:'turn left',           file:'turn_left.fbx',                  icon:'↺', key:'—',    loop:true },
   { name:'turning right 45°',   file:'turning_right_45_degrees.fbx',  icon:'↻', key:'—',    loop:true },
 ];
- 
+
 const GUNS = {
   rifle:{
     name:'Rifle', key:'1',
@@ -350,9 +345,8 @@ const GUNS = {
     recoilUp:0.004, recoilSide:0.0015,
     gunScale:0.18,
     posOffset:[4, 2, 0],
-    rotOffset:[0, Math.PI, Math.PI/2],
-    modelRot:[0, 0, 0],
-    barrelOffset:[0, 3, -40],
+    rotOffset:[0, 0, 0],
+    barrelOffset:[0, 0, -40],
   },
   smg:{
     name:'SMG', key:'2',
@@ -363,9 +357,8 @@ const GUNS = {
     recoilUp:0.003, recoilSide:0.003,
     gunScale:0.15,
     posOffset:[4, 2, 0],
-    rotOffset:[0, Math.PI, Math.PI/2],
-    modelRot:[0, 0, 0],
-    barrelOffset:[0, 2.5, -33],
+    rotOffset:[0, 0, 0],
+    barrelOffset:[0, 0, -33],
   },
   shotgun:{
     name:'Shotgun', key:'3',
@@ -376,9 +369,8 @@ const GUNS = {
     recoilUp:0.012, recoilSide:0.006,
     gunScale:0.18,
     posOffset:[4, 2, 0],
-    rotOffset:[0, Math.PI, Math.PI/2],
-    modelRot:[0, 0, 0],
-    barrelOffset:[0, 2.5, -46],
+    rotOffset:[0, 0, 0],
+    barrelOffset:[0, 0, -46],
   },
   sniper:{
     name:'Sniper', key:'4',
@@ -389,9 +381,8 @@ const GUNS = {
     recoilUp:0.015, recoilSide:0.001,
     gunScale:0.19,
     posOffset:[4, 2, 0],
-    rotOffset:[0, Math.PI, Math.PI/2],
-    modelRot:[0, 0, 0],
-    barrelOffset:[0, 2.5, -58],
+    rotOffset:[0, 0, 0],
+    barrelOffset:[0, 0, -58],
   },
   pistol:{
     name:'Pistol', key:'5',
@@ -402,14 +393,13 @@ const GUNS = {
     recoilUp:0.005, recoilSide:0.002,
     gunScale:0.14,
     posOffset:[3, 2, 0],
-    rotOffset:[0, Math.PI, Math.PI/2],
-    modelRot:[0, 0, 0],
-    barrelOffset:[0, 1.5, -25],
+    rotOffset:[0, 0, 0],
+    barrelOffset:[0, 0, -25],
   },
 };
- 
+
 const GUN_ORDER = ['rifle','smg','shotgun','sniper','pistol'];
- 
+
 const GUN_VARIANTS = {
   smg:[
     {name:'SMG 1',  file:'subfusil_1.fbx'},
@@ -451,7 +441,7 @@ const GUN_VARIANTS = {
     {name:'Pistol 6',file:'pistol_6.fbx'},
   ],
 };
- 
+
 const GUN_CAT_META = {
   smg:    {label:'SMG',     icon:'🔫'},
   shotgun:{label:'Shotgun', icon:'💥'},
@@ -459,10 +449,7 @@ const GUN_CAT_META = {
   rifle:  {label:'Rifle',   icon:'🏹'},
   pistol: {label:'Pistol',  icon:'🔒'},
 };
- 
-// ════════════════════════════════════════════════════════════════
-//  DOM
-// ════════════════════════════════════════════════════════════════
+
 const loadOverlay  = document.getElementById('loading-overlay');
 const loadBar      = document.getElementById('loading-bar');
 const loadMsg      = document.getElementById('loading-msg');
@@ -478,12 +465,9 @@ const gunNameHud   = document.getElementById('gun-name-hud');
 const reloadWrap   = document.getElementById('reload-bar-wrap');
 const reloadBarEl  = document.getElementById('reload-bar');
 const dmgFeed      = document.getElementById('dmg-feed');
- 
+
 function setProgress(pct, msg){ loadBar.style.width=pct+'%'; if(msg) loadMsg.textContent=msg; }
- 
-// ════════════════════════════════════════════════════════════════
-//  RENDERER + SCENE
-// ════════════════════════════════════════════════════════════════
+
 const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
 renderer.shadowMap.enabled = true;
@@ -493,37 +477,32 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 0.9;
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById('canvas-container').appendChild(renderer.domElement);
- 
+
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x0d0d18);
 scene.fog = new THREE.Fog(0x0d0d18, 20, 45);
- 
-// ── Camera ──
-// ── Hip (not aiming): far back, high, character to lower-left
-const CAM_HIP_DIST   = 5.2;   // far back
-const CAM_HIP_HEIGHT = 1.9;   // above character but not too high
-const CAM_HIP_RIGHT  = 0.55;  // moderate right offset
-const CAM_HIP_FOV    = 70;    // wide
- 
-// ── ADS (aiming): tight over right shoulder
-const CAM_ADS_DIST   = 1.8;   // close
-const CAM_ADS_HEIGHT = 1.65;  // shoulder/head level
-const CAM_ADS_RIGHT  = 0.85;  // strong right offset — character pushed to left
-const CAM_ADS_FOV    = 60;    // base ADS fov (then divided by gun zoom)
- 
+
+const CAM_HIP_DIST   = 5.2;
+const CAM_HIP_HEIGHT = 1.9;
+const CAM_HIP_RIGHT  = 0.55;
+const CAM_HIP_FOV    = 70;
+
+const CAM_ADS_DIST   = 1.8;
+const CAM_ADS_HEIGHT = 1.65;
+const CAM_ADS_RIGHT  = 0.85;
+const CAM_ADS_FOV    = 60;
+
 const camera = new THREE.PerspectiveCamera(CAM_HIP_FOV, window.innerWidth/window.innerHeight, 0.05, 200);
 camera.position.set(0, CAM_HIP_HEIGHT, CAM_HIP_DIST);
 const baseFov = CAM_HIP_FOV;
- 
-// Orbit controls (only active when NOT pointer-locked)
+
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.target.set(0,1,0);
 controls.enableDamping = true; controls.dampingFactor = 0.08;
 controls.minDistance = 1.5; controls.maxDistance = 18;
 controls.maxPolarAngle = Math.PI/2 - 0.01;
 controls.update();
- 
-// ── Lights ──
+
 scene.add(new THREE.AmbientLight(0x8090c0, 0.5));
 const dirLight = new THREE.DirectionalLight(0xffffff, 1.8);
 dirLight.position.set(5,10,7); dirLight.castShadow = true;
@@ -533,34 +512,28 @@ dirLight.shadow.camera.far=40; dirLight.shadow.bias=-0.001;
 scene.add(dirLight);
 const fillL = new THREE.DirectionalLight(0x4060ff,0.4); fillL.position.set(-5,3,-5); scene.add(fillL);
 const rimL  = new THREE.DirectionalLight(0xffd0a0,0.6); rimL.position.set(0,5,-8);  scene.add(rimL);
- 
-// Muzzle flash light
+
 const muzzleLight = new THREE.PointLight(0xff8800, 0, 3);
 scene.add(muzzleLight);
- 
-// ── Grid + Ground ──
+
 scene.add(new THREE.GridHelper(20,20,0x2a2a50,0x1a1a30));
 const ground = new THREE.Mesh(
   new THREE.PlaneGeometry(20,20),
   new THREE.MeshStandardMaterial({color:0x0b0b18,roughness:1})
 );
 ground.rotation.x = -Math.PI/2; ground.receiveShadow = true; scene.add(ground);
- 
-// ── Raycaster ──
+
 const raycaster = new THREE.Raycaster();
 const centerVec  = new THREE.Vector2(0,0);
- 
-// ════════════════════════════════════════════════════════════════
-//  STATE
-// ════════════════════════════════════════════════════════════════
+
 let character     = null;
 let rightHandBone = null;
 let mixer         = null;
 let currentAction = null;
 let currentAnimName = '';
 const loadedClips = {};
-const gunMeshes   = {};   // gunId -> THREE.Group
- 
+const gunMeshes   = {};
+
 let activeGunId   = 'rifle';
 let isLocked      = false;
 let isAds         = false;
@@ -568,21 +541,18 @@ let mouseDown     = false;
 let mouseJustDown = false;
 let oneShotActive = false;
 const keys        = {};
- 
+
 let yaw   = 0;
 let pitch = 0;
 const PITCH_MIN = -0.5, PITCH_MAX = 0.65;
 const MOUSE_SENS = 0.0022;
- 
-// Recoil
+
 let recoilPitch = 0, recoilYaw = 0;
- 
-// Spread
+
 let currentSpread = 2.5;
-let adsProgress   = 0;   // 0=hip, 1=fully aimed
+let adsProgress   = 0;
 const ADS_SPEED   = 6;
- 
-// Shooting
+
 const gunState = {};
 GUN_ORDER.forEach(id=>{
   const g = GUNS[id];
@@ -594,20 +564,16 @@ GUN_ORDER.forEach(id=>{
     shootTimer: 0,
   };
 });
- 
-// ── Crosshair spread ──
+
 function setSpreadPx(deg){
   const px = Math.max(4, 4 + deg * 3.2);
   document.documentElement.style.setProperty('--ch-gap', px+'px');
 }
- 
-// ════════════════════════════════════════════════════════════════
-//  INPUT
-// ════════════════════════════════════════════════════════════════
+
 const canvasEl = renderer.domElement;
- 
+
 canvasEl.addEventListener('click', ()=>{ if(!isLocked) canvasEl.requestPointerLock(); });
- 
+
 document.addEventListener('pointerlockchange', ()=>{
   isLocked = document.pointerLockElement === canvasEl;
   controls.enabled = !isLocked;
@@ -617,7 +583,7 @@ document.addEventListener('pointerlockchange', ()=>{
   uiEl.classList.toggle('locked', isLocked);
   if(!isLocked){ mouseDown=false; isAds=false; }
 });
- 
+
 document.addEventListener('mousemove', e=>{
   if(!isLocked) return;
   const sens = isAds ? MOUSE_SENS * (1/GUNS[activeGunId].adsZoom) : MOUSE_SENS;
@@ -625,20 +591,20 @@ document.addEventListener('mousemove', e=>{
   pitch -= e.movementY * sens;
   pitch  = Math.max(PITCH_MIN, Math.min(PITCH_MAX, pitch));
 });
- 
+
 document.addEventListener('mousedown', e=>{
   if(!isLocked) return;
   if(e.button===0){ mouseDown=true; mouseJustDown=true; }
   if(e.button===2){ e.preventDefault(); isAds=true; }
 });
- 
+
 document.addEventListener('mouseup', e=>{
   if(e.button===0){ mouseDown=false; mouseJustDown=false; }
   if(e.button===2) isAds=false;
 });
- 
+
 document.addEventListener('contextmenu', e=>e.preventDefault());
- 
+
 document.addEventListener('keydown', e=>{
   if(e.repeat) return;
   keys[e.code] = true;
@@ -652,31 +618,23 @@ document.addEventListener('keydown', e=>{
   if(e.code==='Digit4')  switchGun('sniper');
   if(e.code==='Digit5')  switchGun('pistol');
 });
- 
+
 document.addEventListener('keyup', e=>{ keys[e.code]=false; });
- 
-// ════════════════════════════════════════════════════════════════
-//  GUN SWITCH
-// ════════════════════════════════════════════════════════════════
+
 function switchGun(id){
   if(id===activeGunId) return;
   if(gunState[activeGunId].reloading) cancelReload();
-  // Hide all gun meshes, show active
   GUN_ORDER.forEach(gid=>{
     if(gunMeshes[gid]) gunMeshes[gid].visible = (gid===id);
   });
   activeGunId = id;
   updateHUD();
-  // Update gun selector UI
   document.querySelectorAll('.gun-slot').forEach(el=>{
     el.classList.toggle('active', el.dataset.gun===id);
   });
   refreshCatHighlight();
 }
- 
-// ════════════════════════════════════════════════════════════════
-//  RELOAD
-// ════════════════════════════════════════════════════════════════
+
 function handleReload(){
   const gs = gunState[activeGunId];
   const gd = GUNS[activeGunId];
@@ -687,14 +645,14 @@ function handleReload(){
   reloadBarEl.style.width='0%';
   triggerOneShot('reloading');
 }
- 
+
 function cancelReload(){
   const gs = gunState[activeGunId];
   gs.reloading=false; gs.reloadTimer=0;
   reloadWrap.classList.remove('visible');
   reloadBarEl.style.width='0%';
 }
- 
+
 function tickReload(dt){
   const gs = gunState[activeGunId];
   const gd = GUNS[activeGunId];
@@ -713,26 +671,22 @@ function tickReload(dt){
     updateHUD();
   }
 }
- 
-// ════════════════════════════════════════════════════════════════
-//  SHOOTING
-// ════════════════════════════════════════════════════════════════
-const tracers = []; // {line, t}
- 
+
+const tracers = [];
+
 function shoot(){
   const gd = GUNS[activeGunId];
   const gs = gunState[activeGunId];
   if(gs.reloading) return;
   if(gs.ammo<=0){ handleReload(); return; }
   if(gs.shootTimer>0) return;
- 
+
   gs.ammo--;
-  gs.shootTimer = 60/gd.rpm; // seconds between shots
- 
+  gs.shootTimer = 60/gd.rpm;
+
   const spread = isAds ? gd.spreadAds : gd.spreadHip;
   const currentGun = gunMeshes[activeGunId];
- 
-  // Muzzle flash
+
   if(currentGun){
     const barrelOff = new THREE.Vector3(...gd.barrelOffset);
     const wp = new THREE.Vector3();
@@ -741,22 +695,19 @@ function shoot(){
     muzzleLight.intensity = 4;
     setTimeout(()=>{ muzzleLight.intensity=0; }, 60);
   }
- 
-  // Recoil
+
   recoilPitch += gd.recoilUp;
   recoilYaw   += (Math.random()-0.5)*gd.recoilSide*2;
- 
-  // Fire pellets
+
   for(let p=0;p<gd.pellets;p++){
     firePellet(spread, gd.damage);
   }
- 
+
   updateHUD();
- 
-  // Auto-reload when empty
+
   if(gs.ammo===0 && gs.reserve>0) setTimeout(handleReload, 200);
 }
- 
+
 function firePellet(spreadDeg, damage){
   const spreadRad = (spreadDeg * Math.PI/180);
   const dir = new THREE.Vector3(
@@ -765,28 +716,26 @@ function firePellet(spreadDeg, damage){
     -1
   ).normalize();
   dir.applyQuaternion(camera.quaternion);
- 
+
   raycaster.set(camera.position.clone(), dir);
   const hits = raycaster.intersectObjects(scene.children, true)
     .filter(h=>h.object!==ground && !h.object.userData.isGun);
- 
+
   const maxRange = 80;
   const endPoint = hits.length ? hits[0].point : camera.position.clone().add(dir.multiplyScalar(maxRange));
- 
-  // Tracer
+
   const geo = new THREE.BufferGeometry().setFromPoints([camera.position.clone(), endPoint]);
   const mat = new THREE.LineBasicMaterial({color:0xffcc44, transparent:true, opacity:0.7});
   const tracer = new THREE.Line(geo, mat);
   scene.add(tracer);
   tracers.push({line:tracer, t:0.12});
- 
-  // Hit effect
+
   if(hits.length){
     spawnHitEffect(hits[0].point);
     showDamageNumber(damage);
   }
 }
- 
+
 function tickTracers(dt){
   for(let i=tracers.length-1;i>=0;i--){
     tracers[i].t -= dt;
@@ -799,8 +748,7 @@ function tickTracers(dt){
     }
   }
 }
- 
-// Hit spark
+
 const hitEffects = [];
 function spawnHitEffect(pos){
   const geo = new THREE.SphereGeometry(0.04,4,4);
@@ -823,8 +771,7 @@ function tickHitEffects(dt){
     }
   }
 }
- 
-// Damage number popup
+
 function showDamageNumber(dmg){
   const el = document.createElement('div');
   el.className='dmg-num';
@@ -832,24 +779,19 @@ function showDamageNumber(dmg){
   dmgFeed.appendChild(el);
   setTimeout(()=>el.remove(), 850);
 }
- 
-// ════════════════════════════════════════════════════════════════
-//  ANIMATION
-// ════════════════════════════════════════════════════════════════
+
 function getMovementAnim(){
   const shift = keys['ShiftLeft']||keys['ShiftRight'];
-  // Movement always takes priority — legs keep animating while firing
   if(shift&&keys['KeyW'])    return 'rifle run';
   if(shift&&keys['KeyS'])    return 'run backwards';
   if(keys['KeyW'])           return 'walking';
   if(keys['KeyS'])           return 'walking backwards';
   if(keys['KeyA'])           return 'strafe left';
   if(keys['KeyD'])           return 'strafe right';
-  // Only show firing anim when standing still
   if(mouseDown)              return 'firing rifle';
   return 'rifle aiming idle';
 }
- 
+
 function playAnimation(name, fade=0.22){
   if(!mixer||!loadedClips[name]||name===currentAnimName) return;
   if(oneShotActive) return;
@@ -864,7 +806,7 @@ function playAnimation(name, fade=0.22){
   currentAction=next; currentAnimName=name;
   setActiveBtn(name); statusText.textContent=name;
 }
- 
+
 function triggerOneShot(name){
   if(!mixer||!loadedClips[name]) return;
   oneShotActive=true;
@@ -883,76 +825,48 @@ function triggerOneShot(name){
     action.stop();
   });
 }
- 
+
 function setActiveBtn(name){
   document.querySelectorAll('.anim-btn').forEach(b=>b.classList.toggle('active',b.dataset.name===name));
 }
- 
-// ════════════════════════════════════════════════════════════════
-//  CAMERA — 3rd Person Over-Shoulder
-// ════════════════════════════════════════════════════════════════
-// Smoothed camera state (lerped each frame)
+
 let camDist   = CAM_HIP_DIST;
 let camHeight = CAM_HIP_HEIGHT;
 let camRight  = CAM_HIP_RIGHT;
- 
+
 function updateCamera(dt){
   if(!character||!isLocked) return;
- 
-  // ADS progress lerp (0 = hip, 1 = fully aimed)
+
   adsProgress += ((isAds?1:0) - adsProgress) * Math.min(1, dt * ADS_SPEED);
   const a = adsProgress;
- 
-  // Smooth-lerp camera rig params toward target
+
   const lerpT = Math.min(1, dt * 14);
   camDist   += (CAM_HIP_DIST   + (CAM_ADS_DIST   - CAM_HIP_DIST)   * a - camDist)   * lerpT;
   camHeight += (CAM_HIP_HEIGHT + (CAM_ADS_HEIGHT  - CAM_HIP_HEIGHT) * a - camHeight) * lerpT;
   camRight  += (CAM_HIP_RIGHT  + (CAM_ADS_RIGHT   - CAM_HIP_RIGHT)  * a - camRight)  * lerpT;
- 
-  // FOV
+
   const gd      = GUNS[activeGunId];
   const adsFov  = CAM_ADS_FOV / gd.adsZoom;
   camera.fov    = CAM_HIP_FOV + (adsFov - CAM_HIP_FOV) * a;
   camera.updateProjectionMatrix();
- 
-  // Crosshair spread
+
   setSpreadPx(gd.spreadHip + (gd.spreadAds - gd.spreadHip) * a);
   crosshairEl.classList.toggle('ads', a > 0.85 && gd.name === 'Sniper');
- 
-  // Recoil decay
+
   recoilPitch *= 0.82;
   recoilYaw   *= 0.82;
- 
-  const ep = pitch + recoilPitch;  // effective pitch
-  const ey = yaw   + recoilYaw;   // effective yaw
- 
+
+  const ep = pitch + recoilPitch;
+  const ey = yaw   + recoilYaw;
+
   const sinY = Math.sin(ey), cosY = Math.cos(ey);
   const cosP = Math.cos(ep), sinP = Math.sin(ep);
- 
-  // ── Camera position ──────────────────────────────────────────
-  // Sits behind the character (pulled back by camDist along the
-  // camera's forward direction), raised by camHeight, and
-  // shifted right by camRight — all in yaw-space so it rotates
-  // with the character facing direction.
-  //
-  //  forward dir: (-sinY, 0, -cosY)   (horizontal component)
-  //  right   dir: ( cosY, 0, -sinY)
-  //
+
   const cx = character.position.x + sinY * camDist * cosP + cosY * camRight;
   const cy = character.position.y + camHeight                - sinP * camDist;
   const cz = character.position.z + cosY * camDist * cosP - sinY * camRight;
   camera.position.set(cx, cy, cz);
- 
-  // ── Camera look-at ───────────────────────────────────────────
-  // CRITICAL FIX: look FORWARD along the aiming direction from
-  // the camera's own position — NOT at the character body.
-  // This keeps the crosshair centre clear of the character mesh.
-  //
-  //  forward vector (including pitch):
-  //    fx = -sinY * cosP
-  //    fy =  sinP
-  //    fz = -cosY * cosP
-  //
+
   const FAR = 100;
   camera.lookAt(
     cx - sinY * cosP * FAR,
@@ -960,34 +874,27 @@ function updateCamera(dt){
     cz - cosY * cosP * FAR
   );
 }
- 
+
 function updateCharacterMovement(dt){
   if(!character || !isLocked) return;
- 
-  // Character always faces where the crosshair points (camera yaw)
+
   character.rotation.y = yaw + Math.PI;
- 
-  // Forward and right are relative to camera yaw
+
   const sinY = Math.sin(yaw), cosY = Math.cos(yaw);
   const move = new THREE.Vector3();
   const speed = (keys['ShiftLeft'] || keys['ShiftRight']) ? 5.2 : 3.2;
- 
-  // W/S = forward/back along camera facing direction
+
   if (keys['KeyW']) { move.x -= sinY; move.z -= cosY; }
   if (keys['KeyS']) { move.x += sinY; move.z += cosY; }
-  // A/D = strafe left/right relative to camera (perpendicular, no yaw change)
   if (keys['KeyA']) { move.x -= cosY; move.z += sinY; }
   if (keys['KeyD']) { move.x += cosY; move.z -= sinY; }
- 
+
   if (move.lengthSq() > 0) {
     move.normalize().multiplyScalar(speed * dt);
     character.position.add(move);
   }
 }
- 
-// ════════════════════════════════════════════════════════════════
-//  HUD
-// ════════════════════════════════════════════════════════════════
+
 function updateHUD(){
   const gs = gunState[activeGunId];
   const gd = GUNS[activeGunId];
@@ -995,58 +902,55 @@ function updateHUD(){
   ammoResEl.textContent   = '/ '+gs.reserve;
   gunNameHud.textContent  = gd.name;
 }
- 
-// ════════════════════════════════════════════════════════════════
-//  LOADING
-// ════════════════════════════════════════════════════════════════
+
 const loader = new FBXLoader();
- 
-// ── Gun texture ──
+
 const textureLoader = new THREE.TextureLoader();
 const gunTexture = textureLoader.load('05_-_Default_baseColor.jpeg');
 gunTexture.colorSpace = THREE.SRGBColorSpace;
 gunTexture.flipY = false;
- 
+
 setProgress(2,'Loading X Bot character...');
- 
-loader.load('X_Bot.fbx', fbx=>{
-  fbx.scale.setScalar(0.012);
-  fbx.traverse(child=>{
-    if(child.isMesh){
-      child.castShadow=true; child.receiveShadow=true;
-      const mats=Array.isArray(child.material)?child.material:[child.material];
-      mats.forEach(m=>{m.roughness=0.6;m.metalness=0.3;});
-    }
-  });
-  scene.add(fbx);
-  character=fbx;
-  mixer=new THREE.AnimationMixer(fbx);
- 
-  // Find right hand bone
-  fbx.traverse(obj=>{
-    if(obj.isBone&&obj.name.toLowerCase().includes('righthand')&&!obj.name.toLowerCase().includes('index')&&!obj.name.toLowerCase().includes('thumb')&&!obj.name.toLowerCase().includes('middle')&&!obj.name.toLowerCase().includes('ring')&&!obj.name.toLowerCase().includes('pinky')){
-      if(!rightHandBone) rightHandBone=obj;
-    }
-  });
-  console.log('Right hand bone:', rightHandBone?.name);
- 
-  setProgress(15,'Loading animations...');
-  loadAnimations(fbx);
-},
-xhr=>{
-  if(xhr.total) setProgress(Math.round(xhr.loaded/xhr.total*13)+2, 'Loading character...');
-},
-err=>{
-  console.error('X_Bot.fbx failed to load:', err);
-  loadMsg.textContent = '❌ X_Bot.fbx not found — make sure it is in the same folder as index.html';
-  loadMsg.style.color = '#ff6666';
-});
- 
+
+loader.load(
+  'X_Bot.fbx',
+  fbx=>{
+    fbx.scale.setScalar(0.012);
+    fbx.traverse(child=>{
+      if(child.isMesh){
+        child.castShadow=true; child.receiveShadow=true;
+        const mats=Array.isArray(child.material)?child.material:[child.material];
+        mats.forEach(m=>{m.roughness=0.6;m.metalness=0.3;});
+      }
+    });
+    scene.add(fbx);
+    character=fbx;
+    mixer=new THREE.AnimationMixer(fbx);
+
+    fbx.traverse(obj=>{
+      if(obj.isBone&&obj.name.toLowerCase().includes('righthand')&&!obj.name.toLowerCase().includes('index')&&!obj.name.toLowerCase().includes('thumb')&&!obj.name.toLowerCase().includes('middle')&&!obj.name.toLowerCase().includes('ring')&&!obj.name.toLowerCase().includes('pinky')){
+        if(!rightHandBone) rightHandBone=obj;
+      }
+    });
+    console.log('Right hand bone:', rightHandBone?.name);
+
+    setProgress(15,'Loading animations...');
+    loadAnimations(fbx);
+  },
+  xhr=>{
+    setProgress(Math.round(xhr.loaded/(xhr.total||1)*13)+2);
+  },
+  err=>{
+    console.error('Failed to load X_Bot.fbx:', err);
+    setProgress(100, 'Error: X_Bot.fbx not found');
+    loadMsg.style.color = '#ff4444';
+  }
+);
+
 function loadAnimations(fbx){
   let loaded=0;
   const total=ANIMATIONS.length;
   ANIMATIONS.forEach(anim=>{
-    setProgress(15, `Loading anim: ${anim.file}...`);
     loader.load(anim.file, animFbx=>{
       if(animFbx.animations?.length){
         const clip=animFbx.animations[0];
@@ -1057,20 +961,19 @@ function loadAnimations(fbx){
       setProgress(15+Math.round(loaded/total*50), `Animations ${loaded}/${total}...`);
       if(loaded===total) loadGuns();
     }, null, err=>{
-      console.warn('Animation failed:', anim.file, err);
+      console.warn(`Animation ${anim.file} failed to load:`, err);
       loaded++;
-      setProgress(15+Math.round(loaded/total*50), `Animations ${loaded}/${total} (${anim.file} missing)...`);
       if(loaded===total) loadGuns();
     });
   });
 }
- 
+
 function loadGuns(){
   const gunIds = GUN_ORDER.slice();
   let loaded=0;
   const total=gunIds.length;
   setProgress(65,'Loading guns...');
- 
+
   gunIds.forEach(id=>{
     const gd=GUNS[id];
     loader.load(gd.file, gunFbx=>{
@@ -1091,22 +994,21 @@ function loadGuns(){
           }
         }
       });
- 
+
       gunFbx.position.set(...gd.posOffset);
       gunFbx.rotation.set(...gd.rotOffset);
       gunFbx.userData.isGun=true;
- 
+
       const parent = rightHandBone || character;
       parent.add(gunFbx);
- 
+
       gunMeshes[id]=gunFbx;
       gunFbx.visible=(id===activeGunId);
- 
+
       loaded++;
       setProgress(65+Math.round(loaded/total*33), `Guns ${loaded}/${total}...`);
       if(loaded===total) onAllLoaded();
     }, null, ()=>{
-      // Gun failed to load — create visible placeholder box scaled for bone-space
       const geo=new THREE.BoxGeometry(4,1.5,18);
       const mat=new THREE.MeshStandardMaterial({color:0x4455aa});
       const placeholder=new THREE.Group();
@@ -1123,7 +1025,7 @@ function loadGuns(){
     });
   });
 }
- 
+
 function onAllLoaded(){
   setProgress(100,'Ready!');
   setTimeout(()=>loadOverlay.classList.add('hidden'),400);
@@ -1132,10 +1034,9 @@ function onAllLoaded(){
   updateHUD();
   playAnimation('rifle aiming idle');
 }
- 
-// Tracks which variant is active per category
+
 const activeVariant = {smg:0, shotgun:0, sniper:1, rifle:0, pistol:0};
- 
+
 function buildGunsUI(){
   const container = document.getElementById('gun-categories');
   container.innerHTML='';
@@ -1143,19 +1044,19 @@ function buildGunsUI(){
   catOrder.forEach(cat=>{
     const meta = GUN_CAT_META[cat];
     const variants = GUN_VARIANTS[cat];
- 
+
     const wrap = document.createElement('div');
     wrap.className='gun-category-wrap';
- 
+
     const catBtn = document.createElement('button');
     catBtn.className='gun-cat-btn';
     catBtn.dataset.cat=cat;
     catBtn.innerHTML=`<span class="cat-icon">${meta.icon}</span><span class="cat-label">${meta.label}</span><span class="cat-arrow">▶</span>`;
- 
+
     const varList = document.createElement('div');
     varList.className='gun-variant-list';
     varList.id='varlist-'+cat;
- 
+
     variants.forEach((v,idx)=>{
       const vBtn = document.createElement('button');
       vBtn.className='gun-var-btn'+(idx===activeVariant[cat]?' active':'');
@@ -1164,64 +1065,57 @@ function buildGunsUI(){
       vBtn.addEventListener('click', e=>{ e.stopPropagation(); selectVariant(cat, idx); });
       varList.appendChild(vBtn);
     });
- 
+
     catBtn.addEventListener('click',()=>{
       const isOpen = catBtn.classList.contains('open');
-      // Close all other open dropdowns
       document.querySelectorAll('.gun-cat-btn.open').forEach(b=>{ b.classList.remove('open'); document.getElementById('varlist-'+b.dataset.cat).classList.remove('open'); });
       if(!isOpen){ catBtn.classList.add('open'); varList.classList.add('open'); }
     });
- 
+
     wrap.appendChild(catBtn);
     wrap.appendChild(varList);
     container.appendChild(wrap);
   });
   refreshCatHighlight();
 }
- 
+
 function refreshCatHighlight(){
   document.querySelectorAll('.gun-cat-btn').forEach(b=>{
     b.classList.toggle('active-cat', b.dataset.cat===activeGunId);
   });
 }
- 
+
 function selectVariant(cat, idx){
   activeVariant[cat] = idx;
   const variant = GUN_VARIANTS[cat][idx];
-  // Update active class on variant buttons
   document.querySelectorAll(`.gun-var-btn[data-cat="${cat}"]`).forEach((b,i)=>{
     b.classList.toggle('active', i===idx);
   });
-  // Switch to gun type and swap model
   switchGun(cat);
   swapGunModel(cat, variant.file);
 }
- 
-const swapGeneration = {};  // gunId -> generation counter to cancel stale loads
- 
+
+const swapGeneration = {};
+
 function swapGunModel(gunId, file){
   const gd = GUNS[gunId];
- 
-  // Bump generation so any in-flight load for this slot is ignored when it arrives
+
   if(!swapGeneration[gunId]) swapGeneration[gunId] = 0;
   const gen = ++swapGeneration[gunId];
- 
-  // Remove existing mesh from scene
+
   const existing = gunMeshes[gunId];
   if(existing && existing.parent) existing.parent.remove(existing);
   gunMeshes[gunId] = null;
- 
+
   loader.load(file, gunFbx=>{
-    // Stale load — a newer swap was requested, discard this result
     if(swapGeneration[gunId] !== gen) return;
- 
+
     gunFbx.scale.setScalar(gd.gunScale);
     gunFbx.traverse(child=>{
       if(child.isMesh){
         child.castShadow = true;
         child.receiveShadow = true;
         child.userData.isGun = true;
-        // Apply palette texture if available
         if(child.material){
           const mats = Array.isArray(child.material) ? child.material : [child.material];
           mats.forEach(m=>{
@@ -1236,19 +1130,17 @@ function swapGunModel(gunId, file){
     gunFbx.position.set(...gd.posOffset);
     gunFbx.rotation.set(...gd.rotOffset);
     gunFbx.userData.isGun = true;
- 
+
     const parent = rightHandBone || character;
     parent.add(gunFbx);
- 
+
     gunMeshes[gunId] = gunFbx;
-    // Show only the active gun
     GUN_ORDER.forEach(gid=>{
       if(gunMeshes[gid]) gunMeshes[gid].visible = (gid === activeGunId);
     });
   }, null, err=>{
     if(swapGeneration[gunId] !== gen) return;
     console.warn('Gun load failed:', file, err);
-    // Visible placeholder so the slot isn't empty
     const geo = new THREE.BoxGeometry(4, 1.5, 18);
     const mat = new THREE.MeshStandardMaterial({color:0x4455aa});
     const ph  = new THREE.Group();
@@ -1264,7 +1156,7 @@ function swapGunModel(gunId, file){
     });
   });
 }
- 
+
 function buildUI(){
   animListEl.innerHTML='';
   ANIMATIONS.forEach(anim=>{
@@ -1275,32 +1167,23 @@ function buildUI(){
     animListEl.appendChild(btn);
   });
 }
- 
-// ════════════════════════════════════════════════════════════════
-//  RESIZE
-// ════════════════════════════════════════════════════════════════
+
 window.addEventListener('resize',()=>{
   camera.aspect=window.innerWidth/window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth,window.innerHeight);
 });
- 
-// ════════════════════════════════════════════════════════════════
-//  MAIN LOOP
-// ════════════════════════════════════════════════════════════════
+
 const clock=new THREE.Clock();
 (function animate(){
   requestAnimationFrame(animate);
   const dt=Math.min(clock.getDelta(), 0.05);
- 
-  // Movement animation
+
   if(isLocked&&!oneShotActive) playAnimation(getMovementAnim());
- 
-  // Shoot timer cooldown
+
   const gs=gunState[activeGunId];
   if(gs.shootTimer>0) gs.shootTimer-=dt;
- 
-  // Auto-fire / single-shot
+
   if(isLocked&&mouseDown&&!gs.reloading){
     const gd=GUNS[activeGunId];
     if(gd.auto&&gs.shootTimer<=0){
@@ -1310,21 +1193,18 @@ const clock=new THREE.Clock();
     }
   }
   mouseJustDown=false;
- 
-  // Tick reload
+
   tickReload(dt);
   updateCharacterMovement(dt);
- 
-  // Tick effects
+
   tickTracers(dt);
   tickHitEffects(dt);
- 
-  // Camera
+
   updateCamera(dt);
- 
+
   if(mixer) mixer.update(dt);
   if(!isLocked) controls.update();
- 
+
   renderer.render(scene,camera);
 })();
 </script>
